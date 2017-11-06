@@ -1,11 +1,8 @@
 import React from 'react';
-import Nav from '@/components/Nav/Nav';
-import routes from '@/routes';
 
 const App = () => (
   <div>
-    <Nav/>
-    {routes}
+    <span>Home Page</span>
   </div>
 );
 
