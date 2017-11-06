@@ -1,0 +1,17 @@
+.nav {
+  display: flex;
+  a {
+    display: inline-block;
+    width: 100px;
+    padding: 15px;
+  }
+  li {
+    outline: 1px solid #000;
+    list-style: none;
+  }
+}
+
+.active {
+  font-weight: bold;
+  background: #ff0;
+}
