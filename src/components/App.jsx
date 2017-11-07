@@ -1,21 +1,52 @@
 import React from 'react';
-import Chart from '@/components/Chart'
+import Chart from '@/components/Chart';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import { addDataItem } from '@/actions/addData';
 
-const data = [
-  {name: 'Page A', uv: 4000, pv: 2400, amt: 2400},
-  {name: 'Page B', uv: 3000, pv: 1398, amt: 2210},
-  {name: 'Page C', uv: 2000, pv: 9800, amt: 2290},
-  {name: 'Page D', uv: 2780, pv: 3908, amt: 2000},
-  {name: 'Page E', uv: 1890, pv: 4800, amt: 2181},
-  {name: 'Page F', uv: 2390, pv: 3800, amt: 2500},
-  {name: 'Page G', uv: 3490, pv: 4300, amt: 2100},
-];
 
-const App = () => (
-  <div>
-    <span>Home Page</span>
-    <Chart data={data}/>
-  </div>
-);
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-export default App;
+  componentWillMount() {
+    const addData = setInterval(() => {
+        this.props.addDataItem({
+          name: moment().format('hh:mm:ss'),
+          uv: 20 * (0.5 - Math.random()),
+          pv: 20 * (0.5 - Math.random()),
+          amt: 20 * (0.5 - Math.random()),
+        })
+      },
+      1000)
+  }
+
+  render() {
+    return (
+      <div>
+        <span>Home Page</span>
+        <Chart data={this.props.data}/>
+      </div>
+    )
+  }
+
+};
+
+const mapStateToProps = state => ({
+  data: state.d3Reducer.data,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addDataItem: (data) => {
+    dispatch(addDataItem(data));
+  },
+  // removeItem: (id) => {
+  //   dispatch(removeItemFromCart(id));
+  // },
+  // changeQuantity: (id, newQuantity) => {
+  //   dispatch(changeItemQuantity(id, newQuantity));
+  // },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
