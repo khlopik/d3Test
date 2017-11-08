@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area } from 'recharts';
+import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area, ReferenceLine, ReferenceDot } from 'recharts';
+import last from 'lodash/last';
 
 const propTypes = {
   data: PropTypes.array.isRequired,
@@ -23,8 +24,10 @@ const Chart = (props) => (
     <YAxis />
     <CartesianGrid strokeDasharray="3 3" />
     <Tooltip />
-    <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
-    <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+    <ReferenceLine x={last(props.data).name} stroke="green" />
+    <ReferenceDot x={last(props.data).name} y={last(props.data).uv} r={5} fill="red" stroke="none" isAnimationActive={true} />
+    <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" isAnimationActive={true} />
+    <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" isAnimationActive={true} />
   </AreaChart>
 );
 
