@@ -5,6 +5,7 @@ import last from 'lodash/last';
 
 const propTypes = {
   data: PropTypes.array.isRequired,
+  controls: PropTypes.shape().isRequired,
 };
 
 const Chart = (props) => (
