@@ -1,15 +1,38 @@
 import React from 'react';
 import Chart from '@/components/Chart';
+import Chart2 from '@/components/Chart2';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { addDataItem } from '@/actions/addData';
 import { startStopDataLoad } from '@/actions/controls';
 
+const data = [
+  {
+    letter: 'A',
+    frequency: .08167,
+  },
+  {
+    letter: 'B',
+    frequency: .01492,
+  },
+  {
+    letter: 'C',
+    frequency: .02782,
+  },
+  {
+    letter: 'D',
+    frequency: .04253,
+  },
+  {
+    letter: 'E',
+    frequency: .12702,
+  },
+];
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    
+
   }
 
   componentWillMount() {
@@ -72,6 +95,11 @@ class App extends React.Component {
         <Chart
           data={this.props.data}
           controls={this.props.controls}
+        />
+        <Chart2
+          data={data}
+          width={600}
+          height={400}
         />
       </div>
     )
